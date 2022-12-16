@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Input } from "../component/Input";
 
 export default function RegisterSection() {
@@ -7,16 +8,17 @@ export default function RegisterSection() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const API_RegisterMember = (e:any) => {
-    e.preventDefault()
+  const API_RegisterMember = (e: any) => {
+    e.preventDefault();
     const payload = {
-        name,
-        email,
-        password
-    }
-    axios.post("http://localhost:8000/register", payload)
-    .then(res => console.log("Ini Response nya : ",res))
-    .catch(err => console.log("Ini Error nya : ", err));
+      name,
+      email,
+      password,
+    };
+    axios
+      .post("http://localhost:8000/register", payload)
+      .then((res) => console.log("Ini Response nya : ", res))
+      .catch((err) => console.log("Ini Error nya : ", err));
   };
 
   return (
@@ -30,21 +32,21 @@ export default function RegisterSection() {
             label="Name*"
             placeholder="Nama Lengkap"
             type="text"
-            onchange={(e:any) => setNama(e.target.value)}
+            onchange={(e: any) => setNama(e.target.value)}
             className="border-2 border-gray-300 my-3 w-full px-3 py-2 rounded-md"
           />
           <Input
             label="Email*"
             placeholder="Contoh: johndee@gmail.com"
             type="email"
-            onchange={(e:any) => setEmail(e.target.value)}
+            onchange={(e: any) => setEmail(e.target.value)}
             className="border-2 border-gray-300 my-3 w-full px-3 py-2 rounded-md"
           />
           <Input
             label="Create Password*"
             placeholder="6+ karakter"
             type="password"
-            onchange={(e:any) => setPassword(e.target.value)}
+            onchange={(e: any) => setPassword(e.target.value)}
             className="border-2 border-gray-300 my-3 w-full px-3 py-2 rounded-md"
           />
           <button
@@ -55,9 +57,11 @@ export default function RegisterSection() {
           </button>
           <p className="mt-3">
             Already have an account?{" "}
-            <span className="text-dark-blue-04 cursor-pointer hover:font-semibold">
-              Sign In here
-            </span>
+            <Link to={"/login"}>
+              <span className="text-dark-blue-04 cursor-pointer hover:font-semibold">
+                Sign In here
+              </span>
+            </Link>
           </p>
         </div>
       </form>
