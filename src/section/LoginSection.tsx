@@ -48,7 +48,7 @@ export default function LoginSection() {
           };
           localStorage.setItem("user_token", JSON.stringify(setData));
           dispatch(getUser(setData));
-          const { name, email, token } = useAppSelector((state) => state.auth);
+
           // navigate("/find_car");
         } else {
           console.log("Ini Errornya tidak 200 : ", res.data.message);
@@ -62,21 +62,17 @@ export default function LoginSection() {
       const userToLoginPayload = {
         credential: credentialResponse.credential,
       };
-      console.log("seblum axios");
 
       const loginGoogleRequest = await axios.post(
         "http://localhost:8000/google_login",
         userToLoginPayload
       );
-      console.log(loginGoogleRequest, "Seduah axioas");
 
       const loginGoogleResponse = loginGoogleRequest.data;
-      // navigate("/");
+      console.log(loginGoogleResponse);
 
-      if (loginGoogleResponse.status) {
-        localStorage.setItem("token", loginGoogleResponse.data.token);
-
-        console.log("Berhasil Login Via Google");
+      if (loginGoogleResponse.status_code == 200) {
+        localStorage.setItem("user_token", loginGoogleResponse.data);
       }
     } catch (err) {
       console.log(err);
@@ -112,7 +108,7 @@ export default function LoginSection() {
             Sign in
           </button>
 
-          <div className="my-3">
+          <div className="my-3 flex justify-center">
             <GoogleOAuthProvider clientId="593901582998-qv52v7oos46agdve8868611tpbac9fuc.apps.googleusercontent.com">
               <GoogleLogin
                 onSuccess={onLoginGoogleSuccess}
