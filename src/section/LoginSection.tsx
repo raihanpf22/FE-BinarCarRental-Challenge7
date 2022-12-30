@@ -38,7 +38,7 @@ export default function LoginSection() {
       password: data.password,
     };
     axios
-      .post("http://localhost:8000/login", payload)
+      .post("https://challenge8-binar.up.railway.app/login", payload)
       .then((res) => {
         if (res.data.statusCode !== 200) {
           const setData: IAuth = {
@@ -64,7 +64,7 @@ export default function LoginSection() {
       };
 
       const loginGoogleRequest = await axios.post(
-        "http://localhost:8000/google_login",
+        "https://challenge8-binar.up.railway.app/google_login",
         userToLoginPayload
       );
 

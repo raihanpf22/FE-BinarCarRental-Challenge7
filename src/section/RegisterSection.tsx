@@ -16,7 +16,7 @@ export default function RegisterSection() {
       password,
     };
     axios
-      .post("http://localhost:8000/register", payload)
+      .post("https://challenge8-binar.up.railway.app/register", payload)
       .then((res) => console.log("Ini Response nya : ", res))
       .catch((err) => console.log("Ini Error nya : ", err));
   };
